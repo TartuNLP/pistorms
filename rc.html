@@ -1,0 +1,101 @@
+<html>
+	<head>
+	<style>
+	td {
+		width:200px;
+		height:200px;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+	} 
+	th {
+		width:80px;
+	}
+	div {
+		border: 0px solid black;
+		height:100%;
+		width:100%;
+		text-align:center;
+		color:#bbb;
+		font-size:96;
+		font-weight:bolder;
+		padding-top:34px;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+	}
+	#fwd {
+		background-color: #fbb;
+	}
+	#back {
+		background-color: #ffb;
+	}
+	#left {
+		background-color: #bbf;
+	}
+	#right {
+		background-color: #bfb;
+	}
+	#up {
+		background-color: #bff;
+	}
+	#down {
+		background-color: #fbf;
+	}
+	</style>
+	<script>
+	function doit(action, stop) {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		 if (this.readyState == 4 && this.status == 200) {
+			document.getElementById(action).style.border = (stop? "0px solid black": "3px solid #666");
+		 }
+	  };
+	  xhttp.open("GET", "/" + (stop? "stop": action), true);
+	  xhttp.send();
+	}
+	
+	function btn(action) {
+		doit(action, false);
+	}
+	
+	function stop(action) {
+		doit(action, true)
+	}
+	</script>
+	</head>
+	
+	<body>
+		<center>
+		<table border="0px" width="800px">
+			<tr>
+				<td>&nbsp;</td>
+				<td><div id="fwd" onmousedown="btn('fwd')" onmouseup="stop('fwd')">&uArr;</div></td>
+				<td>&nbsp;</td>
+				<th/>
+				<td><div id="up" onmousedown="btn('up')" onmouseup="stop('up')">&#x21E1;</div></td>
+			</tr>
+			<tr>
+				<td><div id="left" onmousedown="btn('left')" onmouseup="stop('left')">&lArr;</div></td>
+				<td><div id="stop" onmousedown="btn('stop')" onmouseup="stop('stop')">&times;</div></td>
+				<td><div id="right" onmousedown="btn('right')" onmouseup="stop('right')">&rArr;</div></td>
+				<th/>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><div id="back" onmousedown="btn('back')" onmouseup="stop('back')">&dArr;</div></td>
+				<td>&nbsp;</td>
+				<th/>
+				<td><div id="down" onmousedown="btn('down')" onmouseup="stop('down')">&#x21e3;</div></td>
+			</tr>
+		</table>
+		</center>
+	</body>
+</html>

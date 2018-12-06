@@ -2,8 +2,8 @@
 	<head>
 	<style>
 	td {
-		width:200px;
-		height:200px;
+		width:100px;
+		height:100px;
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -20,9 +20,9 @@
 		width:100%;
 		text-align:center;
 		color:#bbb;
-		font-size:96;
+		font-size:48;
 		font-weight:bolder;
-		padding-top:34px;
+		padding-top:20px;
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -73,27 +73,29 @@
 	
 	<body>
 		<center>
-		<table border="0px" width="800px">
+			<img src="http://raspberrypi.local:8000/stream.mjpg" border="0" width="640" height="480"/>
+			<br/>
+		<table border="0px">
 			<tr>
 				<td>&nbsp;</td>
-				<td><div id="fwd" onmousedown="btn('fwd')" onmouseup="stop('fwd')">&uArr;</div></td>
+				<td><div id="fwd" onmousedown="btn('fwd')" ontouchstart="btn('fwd')" onmouseup="stop('fwd')" ontouchend="stop('fwd')">&uArr;</div></td>
 				<td>&nbsp;</td>
 				<th/>
-				<td><div id="up" onmousedown="btn('up')" onmouseup="stop('up')">&#x21E1;</div></td>
+				<td><div id="up" ontouchstart="btn('up')" onmousedown="btn('up')" ontouchend="stop('up')" onmouseup="stop('up')">&#x21E1;</div></td>
 			</tr>
 			<tr>
-				<td><div id="left" onmousedown="btn('left')" onmouseup="stop('left')">&lArr;</div></td>
-				<td><div id="stop" onmousedown="btn('stop')" onmouseup="stop('stop')">&times;</div></td>
-				<td><div id="right" onmousedown="btn('right')" onmouseup="stop('right')">&rArr;</div></td>
-				<th/>
-				<td>&nbsp;</td>
+				<td><div id="left" ontouchstart="btn('left')" onmousedown="btn('left')" ontouchend="stop('left')" onmouseup="stop('left')">&lArr;</div></td>
+				<td><div id="stop" ontouchstart="btn('stop')" onmousedown="btn('stop')" ontouchend="stop('stop')" onmouseup="stop('stop')">&times;</div></td>
+				<td><div id="right" ontouchstart="btn('right')" onmousedown="btn('right')" ontouchend="stop('right')" onmouseup="stop('right')">&rArr;</div></td>
+				<!--th/>
+				<td>&nbsp;</td-->
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><div id="back" onmousedown="btn('back')" onmouseup="stop('back')">&dArr;</div></td>
+				<td><div id="back" ontouchstart="btn('back')" onmousedown="btn('back')" ontouchend="stop('back')" onmouseup="stop('back')">&dArr;</div></td>
 				<td>&nbsp;</td>
 				<th/>
-				<td><div id="down" onmousedown="btn('down')" onmouseup="stop('down')">&#x21e3;</div></td>
+				<td><div id="down" ontouchstart="btn('down')" onmousedown="btn('down')" ontouchend="stop('down')" onmouseup="stop('down')">&#x21e3;</div></td>
 			</tr>
 		</table>
 		</center>

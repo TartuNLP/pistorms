@@ -1,28 +1,29 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import sys
 import time
-import ZeroBorg
+from pwmzb import ZB
 
-class Zbg:
-	def __init__(self):
-		self.zb = ZeroBorg.ZeroBorg()
-		self.zb.Init()
+speed = 0.2
+
+def move(z, angle):
+	z.start(0, speed)
+	z.start(1, -speed)
+	z.start(2, speed)
+	z.start(3, -speed)
 	
-	def stop(self):
-		self.zb.SetMotor1(0)
-		self.zb.SetMotor2(0)
-		self.zb.SetMotor3(0)
-		self.zb.SetMotor4(0)
+	time.sleep(2)
 	
-	def movet(self, d1, d2, d3, t = 1):
-		if t > 5:
-			t = 5
-		
-		zb.SetMotor1(d1)
-		zb.SetMotor3(d2)
-		zb.SetMotor4(d3)
-		
-		time.sleep(t)
-		
-		self.stop()
+	z.stop(0)
+	z.stop(1)
+	z.stop(2)
+	z.stop(3)
+
+if __name__ == "__main__":
+	z = ZB()
+	print("let's go")
+	try:
+		move(z, 0)
+	except Exception as e:
+		print("AAA", e)
+		z.killall()
+		raise(e)

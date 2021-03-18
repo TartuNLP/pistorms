@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import ZeroBorg
@@ -9,32 +9,34 @@ from flask import request, Flask
 zb = ZeroBorg.ZeroBorg()
 zb.Init()
 
-def fwd():
-    zb.SetMotor1(0.7)
-    zb.SetMotor3(-0.7)
+driveSpeed = 0.7
+rotateSpeed = 0.6
+diagSpeed = 0.6
 
-def back():
-    zb.SetMotor1(-0.7)
-    zb.SetMotor3(0.7)
+def fwd(speed = driveSpeed):
+    zb.SetMotor1(speed)
+    zb.SetMotor2(-speed)
 
-def right():
-    zb.SetMotor1(-0.7)
-    zb.SetMotor3(-0.7)
+def back(speed = driveSpeed):
+    zb.SetMotor1(-speed)
+    zb.SetMotor2(speed)
 
-def left():
-    zb.SetMotor1(0.7)
-    zb.SetMotor3(0.7)
+def straferight(speed = driveSpeed):
+    zb.SetMotor3(speed)
+    zb.SetMotor4(-speed)
 
-def up():
-    zb.SetMotor4(0.55)
+def strafeleft(speed = driveSpeed):
+    zb.SetMotor3(-speed)
+    zb.SetMotor4(speed)
 
-def down():
-    zb.SetMotor4(-0.55)
+def rotateleft(speed = rotateSpeed):
+    zb.SetMotors(speed)
+
+def rotateright(speed = rotateSpeed):
+    zb.SetMotors(-speed)
 
 def stop():
-    zb.SetMotor1(0)
-    zb.SetMotor3(0)
-    zb.SetMotor4(0)
+    zb.MotorsOff()
 
 def loadPage(filepath):
     fh = open(filepath, 'r')
@@ -61,23 +63,47 @@ def goBack():
 
 @app.route('/left', methods=["GET", "POST"])
 def goLeft():
-    left()
+    strafeleft()
     return "left"
 
 @app.route('/right', methods=["GET", "POST"])
 def goRight():
-    right()
+    straferight()
     return "right"
 
-@app.route('/up', methods=["GET", "POST"])
-def doUp():
-    up()
-    return "up"
+@app.route('/fwdleft', methods=["GET", "POST"])
+def goFwdL():
+    fwd(diagSpeed)
+    strafeleft(diagSpeed)
+    return "fwdleft"
 
-@app.route('/down', methods=["GET", "POST"])
+@app.route('/fwdright', methods=["GET", "POST"])
+def goFwdR():
+    fwd(diagSpeed)
+    straferight(diagSpeed)
+    return "fwdright"
+
+@app.route('/backleft', methods=["GET", "POST"])
+def gobackL():
+    back(diagSpeed)
+    strafeleft(diagSpeed)
+    return "backleft" 
+
+@app.route('/backright', methods=["GET", "POST"])
+def gobackR():
+    back(diagSpeed)
+    straferight(diagSpeed)
+    return "backright" 
+
+@app.route('/rotateleft', methods=["GET", "POST"])
+def doUp():
+    rotateleft()
+    return "rotateleft"
+
+@app.route('/rotateright', methods=["GET", "POST"])
 def doDown():
-    down()
-    return "down"
+    rotateright()
+    return "rotateright"
 
 @app.route('/stop', methods=["GET", "POST"])
 def doStop():
@@ -86,16 +112,17 @@ def doStop():
 
 def wiggle():
     for _ in range(3):
-        left()
-        time.sleep(0.1)
-        right()
-        time.sleep(0.1)
-    stop()
+        rotateleft()
+        time.sleep(0.3)
+        stop()
+        rotateright()
+        time.sleep(0.3)
+        stop()
 
 if __name__ == "__main__":
     try:
         #wiggle()
-        app.run(host='raspberrypi.local', port=9990)
+        app.run(host='192.168.88.212', port=9990)
     except Exception as e:
         print("Exception " + str(e))
     finally:

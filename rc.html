@@ -30,24 +30,6 @@
         -ms-user-select: none;
             user-select: none;
 	}
-	#fwd {
-		background-color: #fbb;
-	}
-	#back {
-		background-color: #ffb;
-	}
-	#left {
-		background-color: #bbf;
-	}
-	#right {
-		background-color: #bfb;
-	}
-	#up {
-		background-color: #bff;
-	}
-	#down {
-		background-color: #fbf;
-	}
 	</style>
 	<script>
 	function doit(action, stop) {
@@ -75,13 +57,13 @@
 		<center>
 			<img src="http://raspberrypi.local:8000/stream.mjpg" border="0" width="640" height="480"/>
 			<br/>
-		<table border="0px">
+		<table border="1px">
 			<tr>
-				<td>&nbsp;</td>
+				<td><div id="leftfwd" onmousedown="btn('leftfwd')" ontouchstart="btn('leftfwd')" onmouseup="stop('leftfwd')" ontouchend="stop('leftfwd')">&#x21D6;</div></td>
 				<td><div id="fwd" onmousedown="btn('fwd')" ontouchstart="btn('fwd')" onmouseup="stop('fwd')" ontouchend="stop('fwd')">&uArr;</div></td>
-				<td>&nbsp;</td>
+				<td><div id="rightfwd" onmousedown="btn('rightfwd')" ontouchstart="btn('rightfwd')" onmouseup="stop('rightfwd')" ontouchend="stop('rightfwd')">&#x21D7;</div></td>
 				<th/>
-				<td><div id="up" ontouchstart="btn('up')" onmousedown="btn('up')" ontouchend="stop('up')" onmouseup="stop('up')">&#x21E1;</div></td>
+				<td><div id="up" ontouchstart="btn('rotateleft')" onmousedown="btn('rotateleft')" ontouchend="stop('rotateleft')" onmouseup="stop('rotateleft')">&#x21BA;</div></td>
 			</tr>
 			<tr>
 				<td><div id="left" ontouchstart="btn('left')" onmousedown="btn('left')" ontouchend="stop('left')" onmouseup="stop('left')">&lArr;</div></td>
@@ -91,11 +73,11 @@
 				<td>&nbsp;</td-->
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
+				<td><div id="leftback" onmousedown="btn('leftback')" ontouchstart="btn('leftback')" onmouseup="stop('leftback')" ontouchend="stop('leftback')">&#x21D9;</div></td>
 				<td><div id="back" ontouchstart="btn('back')" onmousedown="btn('back')" ontouchend="stop('back')" onmouseup="stop('back')">&dArr;</div></td>
-				<td>&nbsp;</td>
+				<td><div id="rightback" onmousedown="btn('rightback')" ontouchstart="btn('rightback')" onmouseup="stop('rightback')" ontouchend="stop('rightback')">&#x21D8;</div></td>
 				<th/>
-				<td><div id="down" ontouchstart="btn('down')" onmousedown="btn('down')" ontouchend="stop('down')" onmouseup="stop('down')">&#x21e3;</div></td>
+				<td><div id="down" ontouchstart="btn('rotateright')" onmousedown="btn('rotateright')" ontouchend="stop('rotateright')" onmouseup="stop('rotateright')">&#x21bb;</div></td>
 			</tr>
 		</table>
 		</center>
